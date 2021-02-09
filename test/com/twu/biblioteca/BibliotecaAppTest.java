@@ -36,8 +36,8 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldListAllLibraryBooksAfterWelcomeMessageWhenApplicationStarts() {
-        String expectedBookList = "Manual Antirracista;Djamila Ribeiro\n" +
-                "Admiravel Mundo Novo; Aldous Leonard Huxley";
+        String expectedBookList = "Manual Antirracista;Djamila Ribeiro;2019\n" +
+                "Admiravel Mundo Novo;Aldous Leonard Huxley;1932";
         BibliotecaApp.main(null);
         String terminalMessage = outputStreamCaptor.toString().trim();
         assertThat(terminalMessage, stringContainsInOrder(BibliotecaController.WELCOME_MESSAGE, expectedBookList));

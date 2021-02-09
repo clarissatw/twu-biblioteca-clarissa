@@ -5,10 +5,12 @@ import java.util.Objects;
 public class Book {
     private String title;
     private String author;
+    private String yearPublished;
 
-    public Book(String title, String author) {
+    public Book(String title, String author, String yearPublished) {
         this.title = title;
         this.author = author;
+        this.yearPublished = yearPublished;
     }
 
     @Override
@@ -16,16 +18,11 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title) && Objects.equals(author, book.author);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, author);
+        return Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(yearPublished, book.yearPublished);
     }
 
     @Override
     public String toString() {
-        return title + ";" + author;
+        return title + ";" + author+ ";" + yearPublished;
     }
 }
