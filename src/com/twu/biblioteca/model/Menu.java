@@ -4,6 +4,7 @@ import com.twu.biblioteca.controller.Library;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Menu {
 
@@ -11,17 +12,37 @@ public class Menu {
 
     public Menu() {
         this.options = new ArrayList<>();
+        options.add("Quit");
         options.add("List of Books");
+        options.add("Check Out");
     }
 
     public List<String> getOptions() {
         return options;
     }
 
-    public String selectOption(int optionNumber) {
+    public Optional<String> selectOption(int optionNumber) {
+
         if(optionNumber < 0 || optionNumber > options.size()){
-            return "Please select a valid option!";
+            return Optional.of("Please select a valid option!");
         }
-        return this.options.get(optionNumber-1);
+        return Optional.of(this.options.get(optionNumber));
+    }
+
+    public void print() {
+
+        System.out.print(this.getMenuFormatted());
+
+    }
+
+    public String getMenuFormatted() {
+        StringBuilder menu = new StringBuilder();
+
+
+        for (int i = 0; i < this.getOptions().size(); i++) {
+            menu.append(i + " - " + this.getOptions().get(i) + "\n");
+        }
+
+        return menu.toString();
     }
 }

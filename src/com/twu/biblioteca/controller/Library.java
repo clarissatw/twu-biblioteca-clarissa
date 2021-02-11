@@ -9,10 +9,13 @@ public class Library {
 
     List<Book> libraryList = new ArrayList<>();
 
-    public List<Book> getAllBooks() {
-        libraryList = List.of(new Book("Manual Antirracista","Djamila Ribeiro", "2019"),
+    public Library() {
+        this.libraryList = List.of(new Book("Manual Antirracista","Djamila Ribeiro", "2019"),
                 new Book("Admiravel Mundo Novo","Aldous Leonard Huxley","1932"));
 
+    }
+
+    public List<Book> getAllBooks() {
         return libraryList;
     }
 }

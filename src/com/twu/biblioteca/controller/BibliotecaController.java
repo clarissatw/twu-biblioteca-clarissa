@@ -4,6 +4,7 @@ import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Menu;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class BibliotecaController {
@@ -25,12 +26,20 @@ public class BibliotecaController {
         return library.getAllBooks();
     }
 
-    public String getMenuOfOptions() {
-        String menuText = menu.getOptions().stream().map(Object::toString).collect(Collectors.joining("/n"));
-        return menuText;
+    public Menu getMenuOfOptions() {
+        return this.menu;
     }
 
-    public String selectOption(int optionNumber) {
+    public Optional<String> selectOption(int optionNumber) {
         return menu.selectOption(optionNumber);
+    }
+
+    public void printMenu() {
+        menu.print();
+    }
+
+    public Book checkout(Book book) {
+        library.getAllBooks().removeIf(b -> b.equals(book));
+        return null;
     }
 }

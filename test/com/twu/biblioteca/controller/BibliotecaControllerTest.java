@@ -1,9 +1,9 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Menu;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -12,7 +12,9 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
+import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaControllerTest {
@@ -61,14 +63,16 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldShowMenuOfOptionsWhenBeforeBooksList() {
-        String menuOfOptions = bibliotecaController.getMenuOfOptions();
+        Menu menu = bibliotecaController.getMenuOfOptions();
 
-        assertThat(menuOfOptions, containsString("List of Books"));
+        List<String> options = menu.getOptions();
+
+        assertThat(options, hasItems("List of Books"));
     }
 
     @Test
     public void shouldShowInvalidMessageWhenChooseAnInvalidOption(){
-        String invalidOption = bibliotecaController.selectOption(-1);
+        String invalidOption = bibliotecaController.selectOption(-1).get();
 
         assertThat(invalidOption, is("Please select a valid option!"));
 
@@ -76,6 +80,18 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldExitApplicationWhenChooseOptionToQuit(){
+        String quitOption = bibliotecaController.selectOption(0).get();
+
+        assertThat(quitOption, is("Quit"));
 
     }
+
+    @Test
+    public void shouldCheckoutABookWhenCustomerChoice(){
+        String checkOutOption = bibliotecaController.selectOption(2).get();
+
+        assertThat(checkOutOption, is("Check Out"));
+
+    }
+
 }

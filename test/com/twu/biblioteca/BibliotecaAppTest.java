@@ -1,19 +1,26 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.BibliotecaController;
+import com.twu.biblioteca.model.Menu;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
 
 public class BibliotecaAppTest {
 
-    private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @Before
@@ -23,7 +30,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldTestOutputOrderwhenBibliotecaApplicationStarts() {
-
+        inputToTest("0\n");
         BibliotecaApp.main(null);
 
         String welcomeMessage = outputStreamCaptor.toString().trim();
@@ -32,13 +39,50 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListAllLibraryBooksAfterWelcomeMessageWhenApplicationStarts() {
+    public void shouldListAllLibraryBooksAfterSelectTheBookListOption() {
         String expectedBookList = "Manual Antirracista;Djamila Ribeiro;2019\n" +
                 "Admiravel Mundo Novo;Aldous Leonard Huxley;1932";
+
+        inputToTest("1\n0\n");
+
         BibliotecaApp.main(null);
-        String terminalMessage = outputStreamCaptor.toString().trim();
-        assertThat(terminalMessage, stringContainsInOrder(BibliotecaController.WELCOME_MESSAGE, expectedBookList));
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString(expectedBookList));
     }
+
+    private void inputToTest(String inputStr) {
+        InputStream sysIn = System.in;
+        ByteArrayInputStream input = new ByteArrayInputStream(inputStr.getBytes());
+        System.setIn(input);
+    }
+
+    @Test
+    public void name() {
+    }
+
+    @Test
+    public void shouldShowMenuOptionsWhenRightAfterWelcomeMessage(){
+
+        Menu menu = new Menu();
+        String textMenuFormatted = menu.getMenuFormatted();
+        inputToTest("0\n");
+        BibliotecaApp.main(null);
+
+        String x = "\n0 - Quit\n" +
+                "1 - List of Books\n" +
+                "2 - Check Out\n";
+
+        String terminalMessage = outputStreamCaptor.toString().trim();
+
+        assertThat(terminalMessage, stringContainsInOrder(BibliotecaController.WELCOME_MESSAGE, "0 - Quit\n" , "1 - List of Books\n"));
+
+
+    }
+
 
 
 }
