@@ -87,11 +87,21 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldCheckoutABookWhenCustomerChoice(){
+    public void shouldShowCheckOutOptionWhenMenuOptionsAppears(){
         String checkOutOption = bibliotecaController.selectOption(2).get();
 
         assertThat(checkOutOption, is("Check Out"));
 
+    }
+
+
+    @Test
+    public void shouldNotAppearABookOnTheListWhenABookIsCheckedOut(){
+        Book checkedBook = new Book("Manual Antirracista", "Djamila Ribeiro", "2019");
+
+        Book bookCheckedOut = bibliotecaController.checkout("Manual Antirracista");
+
+        assertThat(bibliotecaController.getBooksList(), not(hasItem(bookCheckedOut)));
     }
 
 }

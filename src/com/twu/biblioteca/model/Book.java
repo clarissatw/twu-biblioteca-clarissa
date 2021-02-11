@@ -6,11 +6,13 @@ public class Book {
     private String title;
     private String author;
     private String yearPublished;
+    private Boolean available;
 
     public Book(String title, String author, String yearPublished) {
         this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
+        this.available = true;
     }
 
     @Override
@@ -24,5 +26,17 @@ public class Book {
     @Override
     public String toString() {
         return title + ";" + author+ ";" + yearPublished;
+    }
+
+    public boolean isAvailable() {
+        return this.available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 }

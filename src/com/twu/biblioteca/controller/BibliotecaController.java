@@ -5,7 +5,6 @@ import com.twu.biblioteca.model.Menu;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class BibliotecaController {
 
@@ -38,8 +37,7 @@ public class BibliotecaController {
         menu.print();
     }
 
-    public Book checkout(Book book) {
-        library.getAllBooks().removeIf(b -> b.equals(book));
-        return null;
+    public Book checkout(String bookTitle) {
+        return library.checkOutBook(bookTitle);
     }
 }

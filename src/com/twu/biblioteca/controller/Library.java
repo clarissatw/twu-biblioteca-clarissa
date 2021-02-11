@@ -4,6 +4,8 @@ import com.twu.biblioteca.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class Library {
 
@@ -16,6 +18,18 @@ public class Library {
     }
 
     public List<Book> getAllBooks() {
-        return libraryList;
+        return libraryList.stream().filter(b -> b.isAvailable()).collect(Collectors.toList());
+    }
+
+    public Book checkOutBook(String bookTitle) {
+
+        for(Book book: this.getAllBooks()) {
+            if( book.getTitle().equalsIgnoreCase(bookTitle)){
+                book.setAvailable(false);
+                return book;
+            }
+        }
+         return null;
+
     }
 }

@@ -83,6 +83,48 @@ public class BibliotecaAppTest {
 
     }
 
+    @Test
+    public void shouldNotifyTheCustomerWhenTheyCheckOutABookSuccessfully(){
+
+        inputToTest("2\nManual Antirracista\n0\n");
+
+        BibliotecaApp.main(null);
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString("Thank you! Enjoy the book"));
+    }
+
+    @Test
+    public void shouldNotifyTheCustomerWhenWriteSpellingError(){
+
+        inputToTest("2\nManual Anti racsta\nManual Antirracista\n0\n");
+
+        BibliotecaApp.main(null);
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString("Sorry, that book is not available"));
+    }
+
+    @Test
+    public void shouldNotifyTheCustomerWhenCheckOutNotAvailableBook(){
+
+        inputToTest("2\nManual Antirracista\n2\nManual Antirracista\n0\n0\n");
+
+        BibliotecaApp.main(null);
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString("Sorry, that book is not available"));
+    }
+
 
 
 }
