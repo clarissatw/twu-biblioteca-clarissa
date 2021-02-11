@@ -3,6 +3,7 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaControllerTest {
@@ -57,5 +59,23 @@ public class BibliotecaControllerTest {
         assertThat(actualBookDetails, is(expectedBookDetails));
     }
 
+    @Test
+    public void shouldShowMenuOfOptionsWhenBeforeBooksList() {
+        String menuOfOptions = bibliotecaController.getMenuOfOptions();
 
+        assertThat(menuOfOptions, containsString("List of Books"));
+    }
+
+    @Test
+    public void shouldShowInvalidMessageWhenChooseAnInvalidOption(){
+        String invalidOption = bibliotecaController.selectOption(-1);
+
+        assertThat(invalidOption, is("Please select a valid option!"));
+
+    }
+
+    @Test
+    public void shouldExitApplicationWhenChooseOptionToQuit(){
+
+    }
 }
