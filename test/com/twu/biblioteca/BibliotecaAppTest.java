@@ -61,10 +61,6 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void name() {
-    }
-
-    @Test
     public void shouldShowMenuOptionsWhenRightAfterWelcomeMessage(){
 
         Menu menu = new Menu();
@@ -94,7 +90,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenWriteSpellingError(){
+    public void shouldNotifyTheCustomerWhenWriteSpellingErrorOnCheckOut(){
 
         inputToTest("2\nManual Anti racsta\nManual Antirracista\n0\n");
 
@@ -121,6 +117,43 @@ public class BibliotecaAppTest {
         assertThat(terminalMessage, containsString("Sorry, that book is not available"));
     }
 
+    @Test
+    public void shouldHaveReturnBookOptionWhenShowMenu(){
+        inputToTest("0\n");
+
+        BibliotecaApp.main(null);
+        String terminalMessage = outputStreamCaptor.toString();
+        assertThat(terminalMessage, containsString("Return a Book"));
+
+    }
+
+    @Test
+    public void shouldNotifyTheCustomerWhenTheyReturnABookSuccessfully(){
+
+        inputToTest("2\nManual Antirracista\n3\nManual Antirracista\n0\n");
+
+        BibliotecaApp.main(null);
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString("Thank you for returning the book"));
+    }
+
+    @Test
+    public void shouldNotifyTheCustomerWhenNotReturnAValidBook(){
+
+        inputToTest("2\nManual Antirracista\n3\nA Espera de um Milagre\n0\n0\n");
+
+        BibliotecaApp.main(null);
+
+        //when
+        String terminalMessage = outputStreamCaptor.toString();
+
+        //than
+        assertThat(terminalMessage, containsString("That is not a valid book to return."));
+    }
 
 
 }

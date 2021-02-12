@@ -58,6 +58,27 @@ public class BibliotecaApp {
 
                     } while(!bookTitle.equals("0"));
                 }
+
+                if (choice.equals("3")) {
+                    String bookTitle = "";
+                    do {
+                        System.out.println("Please, type the book title");
+
+                        if (scanner.hasNextLine()) {
+                            bookTitle = scanner.nextLine();
+                        }
+
+                        Book book = bibliotecaController.returnBook(bookTitle);
+
+                        if (book != null) {
+                            System.out.println("Thank you for returning the book");
+                            break;
+                        } else {
+                            System.out.println("That is not a valid book to return.");
+                        }
+
+                    } while(!bookTitle.equals("0"));
+                }
             }
 
 

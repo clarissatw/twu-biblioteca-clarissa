@@ -15,6 +15,7 @@ public class Menu {
         options.add("Quit");
         options.add("List of Books");
         options.add("Check Out");
+        options.add("Return a Book");
     }
 
     public List<String> getOptions() {

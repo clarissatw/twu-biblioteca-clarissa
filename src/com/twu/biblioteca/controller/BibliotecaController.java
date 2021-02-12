@@ -40,4 +40,8 @@ public class BibliotecaController {
     public Book checkout(String bookTitle) {
         return library.checkOutBook(bookTitle);
     }
+
+    public Book returnBook(String bookTitle) {
+        return library.returnBook(bookTitle);
+    }
 }

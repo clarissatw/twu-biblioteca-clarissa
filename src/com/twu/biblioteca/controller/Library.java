@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Library {
 
-    List<Book> libraryList = new ArrayList<>();
+    List<Book> libraryList;
 
     public Library() {
         this.libraryList = List.of(new Book("Manual Antirracista","Djamila Ribeiro", "2019"),
@@ -31,5 +31,15 @@ public class Library {
         }
          return null;
 
+    }
+
+    public Book returnBook(String bookTitle) {
+        for(Book book: this.libraryList) {
+            if( book.getTitle().equalsIgnoreCase(bookTitle)){
+                book.setAvailable(true);
+                return book;
+            }
+        }
+        return null;
     }
 }
