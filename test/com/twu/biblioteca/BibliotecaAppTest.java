@@ -2,7 +2,6 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.BibliotecaController;
 import com.twu.biblioteca.model.Menu;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,14 +9,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
 
 public class BibliotecaAppTest {
 

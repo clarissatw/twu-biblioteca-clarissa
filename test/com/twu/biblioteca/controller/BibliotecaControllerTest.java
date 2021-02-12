@@ -12,9 +12,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
-import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaControllerTest {
@@ -27,8 +25,9 @@ public class BibliotecaControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        when(library.getAllBooks()).thenReturn(List.of(new Book("Manual Antirracista", "Djamila Ribeiro", "2019"),
-                new Book("Admiravel Mundo Novo", "Aldous Leonard Huxley", "1932")));
+        List<Book> bookList = List.of(new Book("Manual Antirracista", "Djamila Ribeiro", "2019"),
+                new Book("Admiravel Mundo Novo", "Aldous Leonard Huxley", "1932"));
+        when(library.getAllBooks()).thenReturn(bookList);
 
         bibliotecaController = new BibliotecaController(library);
 
@@ -72,7 +71,7 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldShowInvalidMessageWhenChooseAnInvalidOption(){
-        String invalidOption = bibliotecaController.selectOption(-1).get();
+        String invalidOption = bibliotecaController.getOption(-1).get();
 
         assertThat(invalidOption, is("Please select a valid option!"));
 
@@ -80,7 +79,7 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldExitApplicationWhenChooseOptionToQuit(){
-        String quitOption = bibliotecaController.selectOption(0).get();
+        String quitOption = bibliotecaController.getOption(0).get();
 
         assertThat(quitOption, is("Quit"));
 
@@ -88,7 +87,7 @@ public class BibliotecaControllerTest {
 
     @Test
     public void shouldShowCheckOutOptionWhenMenuOptionsAppears(){
-        String checkOutOption = bibliotecaController.selectOption(2).get();
+        String checkOutOption = bibliotecaController.getOption(2).get();
 
         assertThat(checkOutOption, is("Check Out"));
 
