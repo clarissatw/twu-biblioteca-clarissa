@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.BibliotecaController;
 import com.twu.biblioteca.model.Menu;
+import com.twu.biblioteca.model.Message;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class BibliotecaAppTest {
 
         String welcomeMessage = outputStreamCaptor.toString().trim();
 
-        assertThat(welcomeMessage, startsWith(BibliotecaController.WELCOME_MESSAGE));
+        assertThat(welcomeMessage, startsWith(Message.WELCOME_MESSAGE.getDescription()));
     }
 
     @Test

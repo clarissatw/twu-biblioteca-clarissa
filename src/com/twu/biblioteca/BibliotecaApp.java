@@ -12,7 +12,7 @@ public class BibliotecaApp {
 
         BibliotecaController bibliotecaController = new BibliotecaController(new Library());
 
-        bibliotecaController.startApp(bibliotecaController);
+        bibliotecaController.startApp();
 
 
     }

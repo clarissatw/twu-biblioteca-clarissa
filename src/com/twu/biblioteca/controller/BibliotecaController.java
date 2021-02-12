@@ -2,6 +2,7 @@ package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Menu;
+import com.twu.biblioteca.model.Message;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,6 @@ import java.util.Scanner;
 
 public class BibliotecaController {
 
-    public final static String WELCOME_MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     private Menu menu;
     private Library library;
 
@@ -18,30 +18,34 @@ public class BibliotecaController {
         this.menu = new Menu();
     }
 
-    public void startApp(BibliotecaController bibliotecaController) {
-        System.out.println(WELCOME_MESSAGE);
+    public void startApp() {
+        System.out.println(Message.WELCOME_MESSAGE.getDescription());
 
+        showMainMenu();
+    }
+
+    private void showMainMenu() {
         String choice = null;
 
         Scanner scanner = new Scanner(System.in);
         do {
-            bibliotecaController.printMenu();
-
+            printMenu();
 
             if (scanner.hasNextLine()) {
-
                 choice = scanner.nextLine();
-
             }
 
-            selectOptions(choice, scanner);
-
+            selectOption(choice, scanner);
 
         } while (!choice.equals("0"));
     }
 
-    private void selectOptions(String choice, Scanner scanner) {
-        if(!choice.isEmpty()){
+    public void printMenu() {
+        menu.print();
+    }
+
+    private void selectOption(String choice, Scanner scanner) {
+        if (!choice.isEmpty()) {
             if (choice.equals("1")) {
                 getBooksList().forEach(System.out::println);
             }
@@ -49,7 +53,7 @@ public class BibliotecaController {
             if (choice.equals("2")) {
                 String bookTitle = "";
                 do {
-                    System.out.println("Please, type the book title");
+                    System.out.println(Message.TYPE_BOOK_TITLE.getDescription());
 
                     if (scanner.hasNextLine()) {
                         bookTitle = scanner.nextLine();
@@ -58,19 +62,19 @@ public class BibliotecaController {
                     Book book = checkout(bookTitle);
 
                     if (book != null) {
-                        System.out.println("Thank you! Enjoy the book");
+                        System.out.println(Message.SUCCESSFULLY_CHECKOUT.getDescription());
                         break;
                     } else {
-                        System.out.println("Sorry, that book is not available");
+                        System.out.println(Message.NOT_AVAILABLE_CHECKOUT.getDescription());
                     }
 
-                } while(!bookTitle.equals("0"));
+                } while (!bookTitle.equals("0"));
             }
 
             if (choice.equals("3")) {
                 String bookTitle = "";
                 do {
-                    System.out.println("Please, type the book title");
+                    System.out.println(Message.TYPE_BOOK_TITLE.getDescription());
 
                     if (scanner.hasNextLine()) {
                         bookTitle = scanner.nextLine();
@@ -79,19 +83,15 @@ public class BibliotecaController {
                     Book book = returnBook(bookTitle);
 
                     if (book != null) {
-                        System.out.println("Thank you for returning the book");
+                        System.out.println(Message.SUCCESSFULLY_RETURN_BOOK.getDescription());
                         break;
                     } else {
-                        System.out.println("That is not a valid book to return.");
+                        System.out.println(Message.NOT_VALID_BOOK_TO_RETURN.getDescription());
                     }
 
-                } while(!bookTitle.equals("0"));
+                } while (!bookTitle.equals("0"));
             }
         }
-    }
-
-    public String getWelcomeMessage() {
-        return WELCOME_MESSAGE;
     }
 
     public List<Book> getBooksList() {
@@ -104,10 +104,6 @@ public class BibliotecaController {
 
     public Optional<String> getOption(int optionNumber) {
         return menu.selectOption(optionNumber);
-    }
-
-    public void printMenu() {
-        menu.print();
     }
 
     public Book checkout(String bookTitle) {

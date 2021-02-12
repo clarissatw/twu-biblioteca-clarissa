@@ -35,14 +35,6 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldShowCorrectWelcomeMessageWhenApplicationStarts() {
-
-        String welcomeMessage = bibliotecaController.getWelcomeMessage();
-
-        assertThat(welcomeMessage, is(BibliotecaController.WELCOME_MESSAGE));
-    }
-
-    @Test
     public void shouldShowListOfAllLibraryBooksWhenAfterWelcomeMessage() {
         List<Book> actualBookList = bibliotecaController.getBooksList();
 
