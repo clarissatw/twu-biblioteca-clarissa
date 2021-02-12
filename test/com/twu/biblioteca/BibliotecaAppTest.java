@@ -29,7 +29,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldTestOutputOrderwhenBibliotecaApplicationStarts() {
+    public void shouldShowWelcomeMessageWhenLibraryApplicationStarts() {
         inputToTest("0\n");
         BibliotecaApp.main(null);
 
@@ -39,7 +39,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListAllLibraryBooksAfterSelectTheBookListOption() {
+    public void shouldListAllLibraryBooksWhenAfterSelectTheBookListOption() {
         String expectedBookList = "Manual Antirracista;Djamila Ribeiro;2019\n" +
                 "Admiravel Mundo Novo;Aldous Leonard Huxley;1932";
 
@@ -72,13 +72,9 @@ public class BibliotecaAppTest {
         inputToTest("0\n");
         BibliotecaApp.main(null);
 
-        String x = "\n0 - Quit\n" +
-                "1 - List of Books\n" +
-                "2 - Check Out\n";
-
         String terminalMessage = outputStreamCaptor.toString().trim();
 
-        assertThat(terminalMessage, stringContainsInOrder(BibliotecaController.WELCOME_MESSAGE, "0 - Quit\n" , "1 - List of Books\n"));
+        assertThat(terminalMessage, containsString(textMenuFormatted.trim()));
 
 
     }
