@@ -25,7 +25,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return title + ";" + author+ ";" + yearPublished;
+        return title + ";" + author + ";" + yearPublished;
     }
 
     public boolean isAvailable() {

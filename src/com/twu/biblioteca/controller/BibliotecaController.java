@@ -47,6 +47,7 @@ public class BibliotecaController {
     private void selectOption(String choice, Scanner scanner) {
         if (!choice.isEmpty()) {
             if (choice.equals("1")) {
+
                 getBooksList().forEach(System.out::println);
             }
 
@@ -95,7 +96,7 @@ public class BibliotecaController {
     }
 
     public List<Book> getBooksList() {
-        return library.getAllBooks();
+        return library.getAllAvailableBooks();
     }
 
     public Menu getMenuOfOptions() {

@@ -27,18 +27,11 @@ public class BibliotecaControllerTest {
 
         List<Book> bookList = List.of(new Book("Manual Antirracista", "Djamila Ribeiro", "2019"),
                 new Book("Admiravel Mundo Novo", "Aldous Leonard Huxley", "1932"));
-        when(library.getAllBooks()).thenReturn(bookList);
+        when(library.getAllAvailableBooks()).thenReturn(bookList);
 
         bibliotecaController = new BibliotecaController(library);
 
 
-    }
-
-    @Test
-    public void shouldShowListOfAllLibraryBooksWhenAfterWelcomeMessage() {
-        List<Book> actualBookList = bibliotecaController.getBooksList();
-
-        assertThat(actualBookList, hasSize(2));
     }
 
     @Test
@@ -62,7 +55,7 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldShowInvalidMessageWhenChooseAnInvalidOption(){
+    public void shouldShowInvalidMessageWhenChooseAnInvalidOption() {
         String invalidOption = bibliotecaController.getOption(-1).get();
 
         assertThat(invalidOption, is("Please select a valid option!"));
@@ -70,7 +63,7 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldExitApplicationWhenChooseOptionToQuit(){
+    public void shouldExitApplicationWhenChooseOptionToQuit() {
         String quitOption = bibliotecaController.getOption(0).get();
 
         assertThat(quitOption, is("Quit"));
@@ -78,7 +71,7 @@ public class BibliotecaControllerTest {
     }
 
     @Test
-    public void shouldShowCheckOutOptionWhenMenuOptionsAppears(){
+    public void shouldShowCheckOutOptionWhenMenuOptionsAppears() {
         String checkOutOption = bibliotecaController.getOption(2).get();
 
         assertThat(checkOutOption, is("Check Out"));

@@ -2,9 +2,6 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.controller.BibliotecaController;
 import com.twu.biblioteca.controller.Library;
-import com.twu.biblioteca.model.Book;
-
-import java.util.Scanner;
 
 public class BibliotecaApp {
 

@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.controller.BibliotecaController;
 import com.twu.biblioteca.model.Menu;
 import com.twu.biblioteca.model.Message;
 import org.junit.Before;
@@ -57,7 +56,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldShowMenuOptionsWhenRightAfterWelcomeMessage(){
+    public void shouldShowMenuOptionsWhenRightAfterWelcomeMessage() {
 
         Menu menu = new Menu();
         String textMenuFormatted = menu.getMenuFormatted();
@@ -72,7 +71,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenTheyCheckOutABookSuccessfully(){
+    public void shouldNotifyTheCustomerWhenTheyCheckOutABookSuccessfully() {
 
         inputToTest("2\nManual Antirracista\n0\n");
 
@@ -86,7 +85,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenWriteSpellingErrorOnCheckOut(){
+    public void shouldNotifyTheCustomerWhenWriteSpellingErrorOnCheckOut() {
 
         inputToTest("2\nManual Anti racsta\nManual Antirracista\n0\n");
 
@@ -100,7 +99,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenCheckOutNotAvailableBook(){
+    public void shouldNotifyTheCustomerWhenCheckOutNotAvailableBook() {
 
         inputToTest("2\nManual Antirracista\n2\nManual Antirracista\n0\n0\n");
 
@@ -114,7 +113,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldHaveReturnBookOptionWhenShowMenu(){
+    public void shouldHaveReturnBookOptionWhenShowMenu() {
         inputToTest("0\n");
 
         BibliotecaApp.main(null);
@@ -124,7 +123,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenTheyReturnABookSuccessfully(){
+    public void shouldNotifyTheCustomerWhenTheyReturnABookSuccessfully() {
 
         inputToTest("2\nManual Antirracista\n3\nManual Antirracista\n0\n");
 
@@ -138,7 +137,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldNotifyTheCustomerWhenNotReturnAValidBook(){
+    public void shouldNotifyTheCustomerWhenNotReturnAValidBook() {
 
         inputToTest("2\nManual Antirracista\n3\nA Espera de um Milagre\n0\n0\n");
 
